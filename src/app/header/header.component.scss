@@ -1,0 +1,12 @@
+$background-light: rgba(5, 7, 7, 0.877);
+$text-color : floralwhite;
+
+
+
+.jumbotron {
+    background: $background-light ;
+    color:$text-color;
+}
+.center {
+    text-align: center
+}
