@@ -1,152 +1,53 @@
 
-<div >
-    <div>
-      <h3 style="text-align:center">Menu</h3>
+<app-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value" [backdropEnabled]="true" [positionGloballyCenter]="true"
+[displayProgressSpinner]="displayProgressSpinner">
 
-      <hr>
-    </div>
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div fxFlex="25">
+    <h3 style="text-align:center">Menu</h3>
   </div>
 
-<mat-grid-list [cols]="breakpoint"  rowHeight="3:1" (window:resize)="onResize($event)">
-  <mat-grid-tile>
+  <div fxFlex="10">
+    <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-plus fa-lg"></mat-icon>
+  </div>
 
-    <mat-card fxFlex="70" >
+</div>
 
-      <mat-card-content fxLayout.xs="column">
-
-          <div fxLayout="row"  fxLayoutAlign="space-around center">
-
-            <div fxFlex="30">
-              <img width="150" src="/assets/images/watermelone@3x.png">
-            </div>
-
-            <div fxFlex="25">
-
-              <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt">WaterMelon</p>
-              <p style="font-family: Titillium Web;font-weight: 600;  color:#383838">1KG</p>
-              <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt;color :#1CB4BC">30 EGP</p>
-
-            </div>
-
-            <div fxFlex="10">
-              <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-plus fa-lg"></mat-icon>
-              <br>
-              <hr>
-              <br>
-              <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-minus fa-lg"></mat-icon>
-
-            </div>
-          </div>
-
-      </mat-card-content>
-    </mat-card>
-
-  </mat-grid-tile>
-  <mat-grid-tile>
+<hr>
+<mat-grid-list [cols]="breakpoint" rowHeight="3:1" (window:resize)="onResize($event)">
+  <mat-grid-tile *ngFor="let product of productsData">
 
     <mat-card fxFlex="70">
 
       <mat-card-content fxLayout.xs="column">
 
-          <div fxLayout="row"  fxLayoutAlign="space-around center">
+        <div fxLayout="row" fxLayoutAlign="space-around center">
 
-            <div fxFlex="30">
-              <img width="150" src="/assets/images/watermelone@3x.png">
-            </div>
-
-            <div fxFlex="25">
-
-              <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt">WaterMelon</p>
-              <p style="font-family: Titillium Web;font-weight: 600;  color:#383838">1KG</p>
-              <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt;color :#1CB4BC">30 EGP</p>
-
-            </div>
-
-            <div fxFlex="10">
-              <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-plus fa-lg"></mat-icon>
-              <br>
-              <hr>
-              <br>
-              <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-minus fa-lg"></mat-icon>
-
-            </div>
+          <div fxFlex="30">
+            <img width="150" src="{{product.photo}}">
           </div>
+
+          <div fxFlex="25">
+
+            <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt">{{product.name}}</p>
+            <p style="font-family: Titillium Web;font-weight: 600;  color:#383838">{{product.servingSize}}</p>
+            <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt;color :#1CB4BC">{{product.price}} EGP</p>
+
+          </div>
+
+          <div fxFlex="10">
+            <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-plus fa-lg"></mat-icon>
+            <br>
+            <hr>
+            <br>
+            <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-minus fa-lg"></mat-icon>
+
+          </div>
+        </div>
 
       </mat-card-content>
     </mat-card>
 
   </mat-grid-tile>
 
-
-  <mat-grid-tile>
-
-    <mat-card fxFlex="70">
-
-      <mat-card-content fxLayout.xs="column">
-
-          <div fxLayout="row"  fxLayoutAlign="space-around center">
-
-            <div fxFlex="30">
-              <img width="150" src="/assets/images/watermelone@3x.png">
-            </div>
-
-            <div fxFlex="25">
-
-              <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt">WaterMelon</p>
-              <p style="font-family: Titillium Web;font-weight: 600;  color:#383838">1KG</p>
-              <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt;color :#1CB4BC">30 EGP</p>
-
-            </div>
-
-            <div fxFlex="10">
-              <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-plus fa-lg"></mat-icon>
-              <br>
-              <hr>
-              <br>
-              <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-minus fa-lg"></mat-icon>
-
-            </div>
-          </div>
-
-      </mat-card-content>
-    </mat-card>
-
-  </mat-grid-tile>
-
-
-  <mat-grid-tile>
-
-    <mat-card fxFlex="70" >
-
-      <mat-card-content fxLayout.xs="column">
-
-          <div fxLayout="row"  fxLayoutAlign="space-around center">
-
-            <div fxFlex="30">
-              <img width="150" src="/assets/images/watermelone@3x.png">
-            </div>
-
-            <div fxFlex="25">
-
-              <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt">WaterMelon</p>
-              <p style="font-family: Titillium Web;font-weight: 600;  color:#383838">1KG</p>
-              <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt;color :#1CB4BC">30 EGP</p>
-
-            </div>
-
-            <div fxFlex="10">
-              <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-plus fa-lg"></mat-icon>
-              <br>
-              <hr>
-              <br>
-              <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-minus fa-lg"></mat-icon>
-
-            </div>
-          </div>
-
-      </mat-card-content>
-    </mat-card>
-
-  </mat-grid-tile>
-  
 </mat-grid-list>

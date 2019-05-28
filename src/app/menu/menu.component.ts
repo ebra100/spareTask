@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+let products = require('../JsonData/products.json');
 
 @Component({
   selector: 'app-menu',
@@ -9,9 +10,18 @@ export class MenuComponent implements OnInit {
 
   constructor() { }
 
-  breakpoint: any;
+  color = 'primary';
+  mode = 'indeterminate';
+  value = 50;
+  displayProgressSpinner = true;
 
-  ngOnInit() {
+  breakpoint: any;
+  productsData = products
+
+
+  ngOnInit() {    
+    console.log(this.productsData);
+    
     this.breakpoint = (window.innerWidth <= 900) ? 1 : 2;
   }
 

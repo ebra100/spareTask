@@ -1,0 +1,30 @@
+[
+    {
+        "photo": "/assets/images/watermelone@3x.png",
+        "name": "WaterMelon",
+        "price": 30,
+        "servingSize": "1KG",
+        "amountleft": 500
+    },
+    {
+        "photo": "/assets/images/apple.png",
+        "name": "Apples",
+        "price": 30,
+        "serving Size": "1KG",
+        "amount left in stock": 500
+    },
+    {
+        "photo": "/assets/images/kiwi.png",
+        "name": "Kiwi",
+        "price": 30,
+        "serving Size": "1KG",
+        "amount left in stock": 500
+    },
+    {
+        "photo": "/assets/images/mango.png",
+        "name": "Mango",
+        "price": 30,
+        "serving Size": "1KG",
+        "amount left in stock": 500
+    }
+]
