@@ -12,16 +12,19 @@ export class MenuComponent implements OnInit {
 
   color = 'primary';
   mode = 'indeterminate';
-  value = 50;
-  displayProgressSpinner = true;
-
+  value = 30;
+  spinnerWithoutBackdrop = true;
   breakpoint: any;
-  productsData = products
+  productsData: any[]
 
 
-  ngOnInit() {    
-    console.log(this.productsData);
-    
+  ngOnInit() {
+
+    setTimeout(() => {
+      this.productsData = products
+      this.spinnerWithoutBackdrop = false;
+    }, 3000);
+
     this.breakpoint = (window.innerWidth <= 900) ? 1 : 2;
   }
 

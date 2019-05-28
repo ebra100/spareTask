@@ -10,15 +10,12 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing,module';
 import { MatCardModule, MatIconModule, MatGridListModule , MatProgressSpinnerModule} from '@angular/material';
 import { MenuComponent } from './menu/menu.component';
-import { ProgressSpinnerComponent } from './spinner-overlay/progress-spinner.component';
-import { AppOverlayModule } from './overlay/overlay.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     HeaderComponent,
-    ProgressSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +23,6 @@ import { AppOverlayModule } from './overlay/overlay.module';
     FlexLayoutModule,
     MatIconModule,
     MatGridListModule,
-    AppOverlayModule,
     MatProgressSpinnerModule,
     MatCardModule
 
