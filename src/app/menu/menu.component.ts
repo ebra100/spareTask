@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-let products = require('../JsonData/products.json');
+import { ProductService } from '../services/product.service';
+import { LocalStorageService } from '../services/local-storage.service';
+import { IProducts } from '../intefaces/IProducts';
+import { CartService } from '../services/cart.service';
+let constants = require('../Constants/Constants.json');
 
 @Component({
   selector: 'app-menu',
@@ -8,7 +12,9 @@ let products = require('../JsonData/products.json');
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private productService: ProductService,
+    private localStorageService: LocalStorageService,
+    private cartService: CartService) { }
 
   color = 'primary';
   mode = 'indeterminate';
@@ -16,20 +22,36 @@ export class MenuComponent implements OnInit {
   spinnerWithoutBackdrop = true;
   breakpoint: any;
   productsData: any[]
+  cartData: any[] = []
+
 
 
   ngOnInit() {
 
-    setTimeout(() => {
-      this.productsData = products
-      this.spinnerWithoutBackdrop = false;
-    }, 3000);
+    this.breakpoint = (window.innerWidth <= constants.DEFAULT_BREAK_POINT) ? 1 : 2;
 
-    this.breakpoint = (window.innerWidth <= 900) ? 1 : 2;
+    setTimeout(() => {
+
+      this.productsData = this.productService.productsListing();
+      this.cartData = this.cartService.getCartData();
+      this.spinnerWithoutBackdrop = false;
+
+    }, constants.DEFAULT_DELAY);
+
   }
 
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= 900) ? 1 : 2;
+    this.breakpoint = (event.target.innerWidth <= constants.DEFAULT_BREAK_POINT) ? 1 : 2;
+  }
+
+  addProductToCart(product: IProducts) {
+
+    this.cartData[product.productId] = {
+      quantity: 1,
+      ...product
+    }
+
+    this.cartService.postCartData(this.cartData)
   }
 
 }

@@ -1,13 +1,9 @@
-<ng-container style="text-align:center" *ngIf="!productsData">
+<div *ngIf="!productsData" class="loading-indicator">
 
-  <div class="loading-indicator">
-    
-    <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value">
-    </mat-progress-spinner>
+  <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value">
+  </mat-progress-spinner>
 
-  </div>
-
-</ng-container>
+</div>
 
 <div *ngIf="productsData">
 
@@ -36,22 +32,25 @@
 
             <div fxFlex="30">
               <img width="150" src="{{product.photo}}">
+
+              <div *ngIf="cartData[product.productId]" class="circle">{{cartData[product.productId].quantity}}</div>
+
             </div>
 
             <div fxFlex="25">
 
-              <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt">{{product.name}}</p>
-              <p style="font-family: Titillium Web;font-weight: 600;  color:#383838">{{product.servingSize}}</p>
-              <p style="font-family: Titillium Web;font-weight: 600;font-size:12pt;color :#1CB4BC">{{product.price}} EGP</p>
+              <p class="font">{{product.name}}</p>
+              <p class="font" id="servingSize">{{product.servingSize}}</p>
+              <p class="font" id="price">{{product.price}} EGP</p>
 
             </div>
 
             <div fxFlex="10">
-              <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-plus fa-lg"></mat-icon>
+              <mat-icon (click)="addProductToCart(product)" class='clickableAwesomeFont' fxLayoutAlign="end" fontSet="fa" fontIcon="fa-plus fa-lg"></mat-icon>
               <br>
               <hr>
               <br>
-              <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="fa-minus fa-lg"></mat-icon>
+              <mat-icon (click)="deleteProductFromCart(product)" class='clickableAwesomeFont' fxLayoutAlign="end" fontSet="fa" fontIcon="fa-minus fa-lg"></mat-icon>
 
             </div>
           </div>

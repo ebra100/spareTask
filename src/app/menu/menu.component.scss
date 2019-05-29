@@ -9,4 +9,37 @@
     left: 0;
     bottom: 0;
     right: 0;
-  }
+}
+
+.clickableAwesomeFont {
+    cursor: pointer
+}
+
+.font {
+    font-family: Titillium Web;
+    font-weight: 600;
+    font-size: 12pt;
+}
+
+#servigSize {
+    color: #383838
+}
+
+#price {
+    color: #1CB4BC
+}
+
+
+.circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 15px;
+    color: white;
+    background: #1CB4BC;  
+    font-family: Titillium Web;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
