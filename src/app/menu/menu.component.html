@@ -70,9 +70,7 @@
     </button>
 
     <button *ngIf="totalPaymentAmount" mat-button class="payment-btn">
-      <mat-icon style="font-size:20px;margin-right:10px" fontSet="fa" fontIcon="fa-shopping-cart">
-        <span style="margin-left:10px">{{totalPaymentAmount}}</span>
-      </mat-icon>
+      <strong class="font">PAY {{totalPaymentAmount}} EGP</strong>
     </button>
 
   </div>
