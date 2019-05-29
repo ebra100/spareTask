@@ -17,5 +17,7 @@ export class ProductService {
 
     if (!productsData)
       return products
+
+    return productsData
   }
 }

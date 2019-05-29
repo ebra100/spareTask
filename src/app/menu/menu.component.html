@@ -1,4 +1,4 @@
-<div *ngIf="!productsData" class="loading-indicator">
+<div *ngIf="spinnerWithoutBackdrop" class="loading-indicator center">
 
   <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value">
   </mat-progress-spinner>
@@ -21,23 +21,23 @@
 
   <hr>
 
-  <mat-grid-list [cols]="breakpoint" rowHeight="3:1" (window:resize)="onResize($event)">
+  <mat-grid-list [cols]="breakpoint" rowHeight="2:1" (window:resize)="onResize($event)">
     <mat-grid-tile *ngFor="let product of productsData">
 
-      <mat-card fxFlex="70">
+      <mat-card fxFlex="80">
 
         <mat-card-content fxLayout.xs="column">
 
           <div fxLayout="row" fxLayoutAlign="space-around center">
 
-            <div fxFlex="30">
-              <img width="150" src="{{product.photo}}">
+            <div fxFlex="50">
+              <img width="120" src="{{product.photo}}">
 
-              <div *ngIf="cartData[product.productId]" class="circle">{{cartData[product.productId].quantity}}</div>
+              <div *ngIf="cartData[product.productId]&&cartData[product.productId].quantity" class="circle">{{cartData[product.productId].quantity}}</div>
 
             </div>
 
-            <div fxFlex="25">
+            <div fxFlex="35">
 
               <p class="font">{{product.name}}</p>
               <p class="font" id="servingSize">{{product.servingSize}}</p>
@@ -54,12 +54,27 @@
 
             </div>
           </div>
-
         </mat-card-content>
       </mat-card>
 
     </mat-grid-tile>
 
   </mat-grid-list>
+
+  <div fxLayout="row">
+
+    <button mat-button class="btn" style="margin-left: 35%">
+      <mat-icon style="font-size:20px;margin-right:10px" fontSet="fa" fontIcon="fa-shopping-cart">
+        <span style="margin-left:10px">1</span>
+      </mat-icon>
+    </button>
+
+    <button mat-button class="btn" style="margin-right:20%;margin-left: 5%">
+      <mat-icon style="font-size:20px;margin-right:10px" fontSet="fa" fontIcon="fa-shopping-cart">
+        <span style="margin-left:10px">1</span>
+      </mat-icon>
+    </button>
+
+  </div>
 
 </div>

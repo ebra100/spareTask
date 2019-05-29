@@ -8,7 +8,8 @@ export class LocalStorageService {
   constructor() { }
 
   setItem(key: string, data: any) {
-    let dataString = JSON.stringify(data)
+
+    let dataString = JSON.stringify(data)    
     localStorage.setItem(key, dataString)
   }
 

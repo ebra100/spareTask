@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
-let cart: any[] = require('../JsonData/Cart.json');
+let cart: any = require('../JsonData/Cart.json');
 let constants = require('../Constants/Constants.json');
 
 @Injectable({
@@ -11,18 +11,19 @@ export class CartService {
   constructor(private localStorageService: LocalStorageService) { }
 
 
-  postCartData(postCartDataParams: any) {
+  postCartData(postCartDataParams: any, productId: number) {
 
     let cartData = this.getCartData();
 
-    if (cartData[postCartDataParams.productId])
-      cartData[postCartDataParams.productId].quantity++
+    if (cartData[productId])
+      cartData[productId].quantity += postCartDataParams.quantity
 
     else
-      cart.push(postCartDataParams)
-      
-    this.localStorageService.setItem(constants.DEFAULT_CART_KEY, postCartDataParams)
+      cartData[productId] = postCartDataParams
 
+    this.localStorageService.setItem(constants.DEFAULT_CART_KEY, cartData)
+
+    return cartData
   }
 
   getCartData() {
@@ -31,6 +32,8 @@ export class CartService {
 
     if (!cartData)
       return cart
+
+    return cartData
   }
 
 }
