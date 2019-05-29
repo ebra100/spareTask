@@ -36,5 +36,26 @@ export class CartService {
     return cartData
   }
 
+  getCartDataLength() {
+
+    let cartDatagetCartData = this.localStorageService.getItem("cartDataLengt")
+
+    if (!cartDatagetCartData)
+      return 0
+
+    return cartDatagetCartData
+  }
+
+  postCartDataLength(quantity) {
+
+    let cartDataLength = this.getCartDataLength();
+
+    cartDataLength += quantity;
+
+    this.localStorageService.setItem("cartDataLengt", cartDataLength)
+
+    return cartDataLength
+  }
+
 }
 

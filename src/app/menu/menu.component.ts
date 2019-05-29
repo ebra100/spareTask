@@ -3,6 +3,7 @@ import { ProductService } from '../services/product.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { IProducts } from '../intefaces/IProducts';
 import { CartService } from '../services/cart.service';
+import { PaymentService } from '../services/payment.service';
 let constants = require('../Constants/Constants.json');
 
 @Component({
@@ -14,7 +15,8 @@ export class MenuComponent implements OnInit {
 
   constructor(private productService: ProductService,
     private localStorageService: LocalStorageService,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private paymentService: PaymentService) { }
 
   color = 'primary';
   mode = 'indeterminate';
@@ -23,8 +25,8 @@ export class MenuComponent implements OnInit {
   breakpoint: any;
   productsData: any[]
   cartData: any = {}
-
-
+  totalCartLength: number = 0;
+  totalPaymentAmount: number = 0
 
   ngOnInit() {
 
@@ -34,7 +36,9 @@ export class MenuComponent implements OnInit {
 
       this.productsData = this.productService.productsListing();
       this.cartData = this.cartService.getCartData();
-
+      this.totalCartLength = this.cartService.getCartDataLength();
+      this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()
+      
       if (this.productsData)
         this.spinnerWithoutBackdrop = false;
 
@@ -68,14 +72,19 @@ export class MenuComponent implements OnInit {
 
     let cartParams = {
       quantity: quantity,
-      productId: product.productId
+      ...product
     }
 
     this.spinnerWithoutBackdrop = true;
 
     setTimeout(() => {
+   
       this.cartData = this.cartService.postCartData(cartParams, product.productId)
+      this.totalCartLength = this.cartService.postCartDataLength(quantity)
+      this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()
+
       this.spinnerWithoutBackdrop = false;
     }, 1000)
   }
+
 }

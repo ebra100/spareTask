@@ -19,12 +19,23 @@
     color: #383838
 }
 
-.btn {
-    color: white;
+.view-cart-btn {
+    color: #FFFFFF;
     width: 10%;
     height: 30%;
     background-color: #383838;
     margin-bottom: 10% !important;
+    margin-left: 35%
+}
+
+.payment-btn {
+    color: #FFFFFF;
+    width: 10%;
+    height: 30%;
+    background-color: #00C7B8;
+    margin-bottom: 10% !important;
+    margin-right: 20%;
+    margin-left: 5%
 }
 
 .center {

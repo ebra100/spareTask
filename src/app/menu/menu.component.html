@@ -63,15 +63,15 @@
 
   <div fxLayout="row">
 
-    <button mat-button class="btn" style="margin-left: 35%">
+    <button *ngIf="totalCartLength" mat-button class="view-cart-btn">
       <mat-icon style="font-size:20px;margin-right:10px" fontSet="fa" fontIcon="fa-shopping-cart">
-        <span style="margin-left:10px">1</span>
+        <span style="margin-left:10px">{{totalCartLength}}</span>
       </mat-icon>
     </button>
 
-    <button mat-button class="btn" style="margin-right:20%;margin-left: 5%">
+    <button *ngIf="totalPaymentAmount" mat-button class="payment-btn">
       <mat-icon style="font-size:20px;margin-right:10px" fontSet="fa" fontIcon="fa-shopping-cart">
-        <span style="margin-left:10px">1</span>
+        <span style="margin-left:10px">{{totalPaymentAmount}}</span>
       </mat-icon>
     </button>
 
