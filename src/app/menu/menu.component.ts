@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit {
       this.cartData = this.cartService.getCartData();
       this.totalCartLength = this.cartService.getCartDataLength();
       this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()
-      
+
       if (this.productsData)
         this.spinnerWithoutBackdrop = false;
 
@@ -51,6 +51,11 @@ export class MenuComponent implements OnInit {
   }
 
   addProductToCart(product: IProducts, ) {
+
+    let isEnough = this.productService.hasEnoughItems(product)
+
+    if (!isEnough)
+      return;
 
     this.editCartData(product, 1)
 
@@ -78,7 +83,7 @@ export class MenuComponent implements OnInit {
     this.spinnerWithoutBackdrop = true;
 
     setTimeout(() => {
-   
+
       this.cartData = this.cartService.postCartData(cartParams, product.productId)
       this.totalCartLength = this.cartService.postCartDataLength(quantity)
       this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()

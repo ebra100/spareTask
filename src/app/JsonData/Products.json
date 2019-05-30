@@ -21,7 +21,7 @@
         "name": "Kiwi",
         "price": 30,
         "servingSize": "1KG",
-        "amountleft": 500
+        "amountleft": 0
     },
     {
         "productId": 4,
