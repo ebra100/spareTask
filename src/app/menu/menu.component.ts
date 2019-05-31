@@ -67,8 +67,10 @@ export class MenuComponent implements OnInit {
     },
     )
     dialogRef.afterClosed().subscribe(products => {
-      if (products)
+      if (products) {
         this.productsData = products;
+        this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()
+      }
     })
   }
 
