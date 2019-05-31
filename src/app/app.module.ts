@@ -10,23 +10,28 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 import { AppRoutingModule } from './app-routing,module';
-import { MatCardModule, MatIconModule, MatGridListModule, MatProgressSpinnerModule, MatButtonModule } from '@angular/material';
-import { TitledModalWithContentComponent } from './titled-modal-with-content/titled-modal-with-content.component';
+import { MatCardModule, MatIconModule, MatGridListModule, MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { OpenDialogComponent } from './OpenDialogt/open-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     HeaderComponent,
-    TitledModalWithContentComponent,
+    OpenDialogComponent,
     EditProductComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
     AppRoutingModule,
     FlexLayoutModule,
+    MatFormFieldModule,
     MatIconModule,
     MatGridListModule,
     MatProgressSpinnerModule,
@@ -36,7 +41,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 
   ],
   entryComponents: [
-    TitledModalWithContentComponent
+    OpenDialogComponent,
+    EditProductComponent
   ],
 
   providers: [],

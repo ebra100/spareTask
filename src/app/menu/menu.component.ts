@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { IProducts } from '../intefaces/IProducts';
 import { CartService } from '../services/cart.service';
 import { PaymentService } from '../services/payment.service';
+import { OpenDialog } from '../services/open-dialog.service';
+import { EditProductComponent } from '../edit-product/edit-product.component';
 let constants = require('../Constants/Constants.json');
 
 @Component({
@@ -16,7 +18,12 @@ export class MenuComponent implements OnInit {
   constructor(private productService: ProductService,
     private localStorageService: LocalStorageService,
     private cartService: CartService,
-    private paymentService: PaymentService) { }
+    private changeDetector: ChangeDetectorRef,
+    private paymentService: PaymentService,
+    private openDialog: OpenDialog,
+  ) {
+
+  }
 
   color = 'primary';
   mode = 'indeterminate';
@@ -49,6 +56,25 @@ export class MenuComponent implements OnInit {
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= constants.DEFAULT_BREAK_POINT) ? 1 : 3;
   }
+
+  editProduct(product) {
+
+    let dialogRef = this.openDialog.open({
+      component: EditProductComponent,
+      content: product,
+      title: "Edit Product",
+      closeButtonName: "close"
+    },
+    )
+    dialogRef.afterClosed().subscribe(products => {
+      console.log(products);
+      this.productsData = products;
+      this.changeDetector.detectChanges();
+      console.log(this.productsData);
+
+    })
+  }
+
 
   addProductToCart(product: IProducts, ) {
 

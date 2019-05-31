@@ -1,3 +1,33 @@
-<p>
-  edit-product works!
-</p>
+<h1 style="text-align:center" mat-dialog-title>{{ data.title }}</h1>
+
+<div style="text-align:center">
+
+  <form [formGroup]="editProductForm" (ngSubmit)="editProduct(editProductForm.value)">
+
+    <mat-form-field appearance="outline">
+      <mat-label>produc tName </mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Price </mat-label>
+      <input matInput type="number" formControlName="price">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Serving Size </mat-label>
+      <input matInput formControlName="servingSize">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Inventory Left </mat-label>
+      <input matInput formControlName="amountleft">
+    </mat-form-field>
+
+    <div>
+      <button mat-raised-button color="primary" [disabled]="editProductForm.invalid" type="submit">Submit</button>
+    </div>
+
+  </form>
+
+</div>

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IProducts } from '../intefaces/IProducts';
 import { LocalStorageService } from './local-storage.service';
-import { TitledModalWithContentService } from './titled-modal-with-content.service';
+import { OpenDialogComponent } from '../OpenDialogt/open-dialog.component';
+import { OpenDialog } from './open-dialog.service';
 let constants = require('../Constants/Constants.json');
 let products: any[] = require('../JsonData/Products.json')
 
@@ -11,7 +12,7 @@ let products: any[] = require('../JsonData/Products.json')
 export class ProductService {
 
   constructor(private localStorageService: LocalStorageService,
-    private titledModalWithContentService: TitledModalWithContentService) { }
+    private oepnDialog: OpenDialog) { }
 
   productsListing(): IProducts[] {
 
@@ -23,21 +24,45 @@ export class ProductService {
     return productsData
   }
 
+  getProductById(productId) {
+
+    let product = products.filter(product => product.productId == productId)
+    return product[0]
+
+  }
+
+  editProduct(editProductObj) {
+
+    let productId = editProductObj.productId;
+    let editedProductData = editProductObj.product
+    let products = this.productsListing();
+
+    for (let index = 0; index < products.length; index++) {
+      if (products[index].productId == productId) {
+        products[index] = editedProductData;
+        products[index].productId = productId;
+      }
+    }
+
+    this.localStorageService.setItem(constants.DEFAULT_BRODUCT_KEY, products)
+    return products
+  }
+
+
   hasEnoughItems(product: IProducts) {
 
     if (!product.amountleft) {
 
-      this.titledModalWithContentService.open(
+      this.oepnDialog.open(
         {
+          component: OpenDialogComponent,
           closeButtonName: "close",
           content: "this product has been ran out from the store",
           title: "Error"
         })
 
       return false
-
     }
-
     return true
   }
 }

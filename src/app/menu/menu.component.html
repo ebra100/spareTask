@@ -22,7 +22,7 @@
   <hr>
 
   <mat-grid-list [cols]="breakpoint" rowHeight="2:1" (window:resize)="onResize($event)">
-    <mat-grid-tile *ngFor="let product of productsData">
+    <mat-grid-tile  class='clickableAwesomeFont' *ngFor="let product of productsData"> 
 
       <mat-card fxFlex="80">
 
@@ -30,18 +30,18 @@
 
           <div fxLayout="row" fxLayoutAlign="space-around center">
 
-            <div fxFlex="50">
-              <img width="120" src="{{product.photo}}">
+            <div fxFlex="50" (click)="editProduct(product)">
+              <img width="120" src="{{product?.photo}}">
 
               <div *ngIf="cartData[product.productId]&&cartData[product.productId].quantity" class="circle">{{cartData[product.productId].quantity}}</div>
 
             </div>
 
-            <div fxFlex="35">
+            <div fxFlex="35" (click)="editProduct(product)">
 
-              <p class="font">{{product.name}}</p>
-              <p class="font" id="servingSize">{{product.servingSize}}</p>
-              <p class="font" id="price">{{product.price}} EGP</p>
+              <p class="font">{{product?.name}}</p>
+              <p class="font" id="servingSize">{{product?.servingSize}}</p>
+              <p class="font" id="price">{{product?.price}} EGP</p>
 
             </div>
 

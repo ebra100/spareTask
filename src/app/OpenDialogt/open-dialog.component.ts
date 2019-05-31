@@ -3,14 +3,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ModalData } from './modal-data.interface';
 
 @Component({
-  selector: 'app-titled-modal-with-content',
-  templateUrl: './titled-modal-with-content.component.html',
+  selector: 'app-open-dialog.component',
+  templateUrl: './open-dialog.component.html',
   styles: []
 })
-export class TitledModalWithContentComponent implements OnInit {
+export class OpenDialogComponent implements OnInit {
 
   constructor(
-    public dialogRef: MatDialogRef<TitledModalWithContentComponent>,
+    public dialogRef: MatDialogRef<OpenDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ModalData
   ) { }
 

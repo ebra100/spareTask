@@ -1,5 +1,6 @@
 export interface ModalData {
     title: string;
-    content: string;
+    content: string | any;
     closeButtonName: string;
+    component: any
 }
