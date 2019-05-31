@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ModalData } from '../OpenDialogt/modal-data.interface';
@@ -5,44 +6,74 @@ import { FormBuilder, FormGroup, Validators, FormsModule, NgForm } from '@angula
 import { IProducts } from '../intefaces/IProducts';
 import { ProductService } from '../services/product.service';
 import { MenuComponent } from '../menu/menu.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-edit-product',
-  templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.css']
+  selector: 'app-edit-or-add-product',
+  templateUrl: './edit-or-add-product.component.html',
+  styleUrls: ['./edit-or-add-product.component.css']
 })
-export class EditProductComponent implements OnInit {
+export class EditOrAddProductComponent implements OnInit {
 
 
   constructor(
-    public dialogRef: MatDialogRef<EditProductComponent>,
+    public dialogRef: MatDialogRef<EditOrAddProductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ModalData,
     private fb: FormBuilder,
+    public sanitizer: DomSanitizer,
     private productService: ProductService
-  ) {}
+  ) { }
 
-  productData: IProducts = this.data.content
-  editProductForm: FormGroup;
 
+  editOrAddFlag: string = this.data.content.editOrAddFlag
+  productData: IProducts = this.editOrAddFlag == 'edit' ? this.data.content.productData : {}
+  editOrAddProductForm: FormGroup;
+  addProductImage = "/assets/images/apple.png"
   ngOnInit() {
 
-    this.editProductForm = this.fb.group({
+
+    this.editOrAddProductForm = this.fb.group({
       'name': [this.productData.name, [Validators.required, Validators.pattern(new RegExp("^[a-zA-Z -]*$"))]],
       'price': [this.productData.price, [Validators.required, Validators.pattern(new RegExp(/^\d*\.?\d*$/))]],
       'servingSize': [this.productData.servingSize, [Validators.required]],
       'amountleft': [this.productData.amountleft, [Validators.required, Validators.pattern(new RegExp(/^\d*\.?\d*$/))]],
+      'photo': [this.productData.photo || this.addProductImage],
 
     });
   }
 
-  close() {
-    let products = this.productService.productsListing()
-    this.dialogRef.close(products);
+  editOrAddProduct(formValue) {
+
+    if (this.editOrAddFlag == 'edit')
+      this.editProduct(formValue)
+
+    else
+      this.addProduct(formValue)
+
+
   }
+
+
+  addProduct(formValue) {
+
+    if (this.editOrAddProductForm.invalid)
+      return;
+
+    let productsData = this.productService.productsListing();
+
+    let addProductObj = {
+      productId: productsData.length + 1,
+      ...formValue
+    }
+    let products = this.productService.addProduct(addProductObj)
+    this.dialogRef.close(products);
+
+  }
+
 
   editProduct(formValue) {
 
-    if (this.editProductForm.invalid)
+    if (this.editOrAddProductForm.invalid)
       return;
 
     let editProductObj = {
@@ -50,7 +81,7 @@ export class EditProductComponent implements OnInit {
       product: formValue
     }
     let products = this.productService.editProduct(editProductObj)
-    this.close();
-
+    this.dialogRef.close(products);
   }
+
 }

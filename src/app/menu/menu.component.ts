@@ -5,7 +5,7 @@ import { IProducts } from '../intefaces/IProducts';
 import { CartService } from '../services/cart.service';
 import { PaymentService } from '../services/payment.service';
 import { OpenDialog } from '../services/open-dialog.service';
-import { EditProductComponent } from '../edit-product/edit-product.component';
+import { EditOrAddProductComponent } from '../edit-or-add-product/edit-or-add-product.component';
 let constants = require('../Constants/Constants.json');
 
 @Component({
@@ -60,21 +60,32 @@ export class MenuComponent implements OnInit {
   editProduct(product) {
 
     let dialogRef = this.openDialog.open({
-      component: EditProductComponent,
-      content: product,
+      component: EditOrAddProductComponent,
+      content: { productData: product, editOrAddFlag: 'edit' },
       title: "Edit Product",
       closeButtonName: "close"
     },
     )
     dialogRef.afterClosed().subscribe(products => {
-      console.log(products);
-      this.productsData = products;
-      this.changeDetector.detectChanges();
-      console.log(this.productsData);
-
+      if (products)
+        this.productsData = products;
     })
   }
 
+  addProduct() {
+
+    let dialogRef = this.openDialog.open({
+      component: EditOrAddProductComponent,
+      content: { editOrAddFlag: 'add' },
+      title: "Add Product",
+      closeButtonName: "close"
+    },
+    )
+    dialogRef.afterClosed().subscribe(products => {
+      if (products)
+        this.productsData = products;
+    })
+  }
 
   addProductToCart(product: IProducts, ) {
 

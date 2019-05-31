@@ -24,11 +24,11 @@ export class ProductService {
     return productsData
   }
 
-  getProductById(productId) {
+  getProductById(id) {
 
-    let product = products.filter(product => product.productId == productId)
-    return product[0]
-
+    let products = this.productsListing()
+    let mathchedProduct = products.filter(item => item.productId === id)
+    return mathchedProduct[0]
   }
 
   editProduct(editProductObj) {
@@ -44,6 +44,14 @@ export class ProductService {
       }
     }
 
+    this.localStorageService.setItem(constants.DEFAULT_BRODUCT_KEY, products)
+    return products
+  }
+
+  addProduct(addProductObj) {
+
+    let products = this.productsListing();
+    products.push(addProductObj)
     this.localStorageService.setItem(constants.DEFAULT_BRODUCT_KEY, products)
     return products
   }

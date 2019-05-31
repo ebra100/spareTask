@@ -12,16 +12,24 @@ import { MenuComponent } from './menu/menu.component';
 import { AppRoutingModule } from './app-routing,module';
 import { MatCardModule, MatIconModule, MatGridListModule, MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
-import { EditProductComponent } from './edit-product/edit-product.component';
 import { OpenDialogComponent } from './OpenDialogt/open-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { EditOrAddProductComponent } from './edit-or-add-product/edit-or-add-product.component';
+import { MenuOrViewCartComponent } from './menu-or-view-cart/menu-or-view-cart.component';
+import { ViewCartComponent } from './view-cart/view-cart.component';
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     HeaderComponent,
     OpenDialogComponent,
-    EditProductComponent
+
+    EditOrAddProductComponent,
+
+    MenuOrViewCartComponent,
+
+    ViewCartComponent
   ],
   imports: [
     BrowserModule,
@@ -37,12 +45,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatProgressSpinnerModule,
     MatButtonModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    Ng2ImgMaxModule
 
   ],
   entryComponents: [
     OpenDialogComponent,
-    EditProductComponent
+    EditOrAddProductComponent
   ],
 
   providers: [],
