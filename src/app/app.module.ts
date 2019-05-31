@@ -14,9 +14,8 @@ import { MatCardModule, MatIconModule, MatGridListModule, MatProgressSpinnerModu
 import { MatDialogModule } from '@angular/material';
 import { OpenDialogComponent } from './OpenDialogt/open-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { NgxLoadingModule } from 'ngx-loading';
 import { EditOrAddProductComponent } from './edit-or-add-product/edit-or-add-product.component';
-import { MenuOrViewCartComponent } from './menu-or-view-cart/menu-or-view-cart.component';
 import { ViewCartComponent } from './view-cart/view-cart.component';
 @NgModule({
   declarations: [
@@ -24,16 +23,13 @@ import { ViewCartComponent } from './view-cart/view-cart.component';
     MenuComponent,
     HeaderComponent,
     OpenDialogComponent,
-
     EditOrAddProductComponent,
-
-    MenuOrViewCartComponent,
-
     ViewCartComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    NgxLoadingModule.forRoot({}),
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -45,8 +41,7 @@ import { ViewCartComponent } from './view-cart/view-cart.component';
     MatProgressSpinnerModule,
     MatButtonModule,
     MatCardModule,
-    MatDialogModule,
-    Ng2ImgMaxModule
+    MatDialogModule
 
   ],
   entryComponents: [

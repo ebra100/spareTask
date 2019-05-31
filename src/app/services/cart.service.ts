@@ -26,13 +26,18 @@ export class CartService {
     return cartData
   }
 
+  saveCartData(saveCartDataParams) {
+    this.localStorageService.setItem(constants.DEFAULT_CART_KEY, saveCartDataParams)
+
+  }
+  
   getCartData() {
 
     let cartData = this.localStorageService.getItem(constants.DEFAULT_CART_KEY)
 
     if (!cartData)
       return cart
- 
+
     return cartData
   }
 
@@ -46,16 +51,32 @@ export class CartService {
     return cartDatagetCartData
   }
 
+  emptyCartData() {
+
+    this.localStorageService.setItem(constants.DEFAULT_CART_KEY, {})
+    let cartDatagetCartData = this.localStorageService.setItem("cartDataLengt", '0')
+
+    return {}
+  }
+
   postCartDataLength(quantity) {
 
-    let cartDataLength = this.getCartDataLength();
+    let cartDataLength = +this.getCartDataLength();
 
-    cartDataLength += quantity;
+    cartDataLength += +quantity;
 
     this.localStorageService.setItem("cartDataLengt", cartDataLength)
 
     return cartDataLength
   }
 
+  updateCartDataQuantity(editedCartData, quantity) {
+
+    let cartData = this.getCartData();
+    let productId = editedCartData.productId;
+    cartData[productId].quantity += quantity
+    this.localStorageService.setItem(constants.DEFAULT_CART_KEY, cartData)
+
+  }
 }
 

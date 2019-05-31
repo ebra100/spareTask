@@ -1,9 +1,5 @@
-<div *ngIf="spinnerWithoutBackdrop" class="loading-indicator center">
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" ></ngx-loading>
 
-  <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value">
-  </mat-progress-spinner>
-
-</div>
 
 <div *ngIf="productsData">
 
@@ -63,7 +59,7 @@
 
   <div fxLayout="row">
 
-    <button *ngIf="totalCartLength" mat-button class="view-cart-btn">
+    <button *ngIf="totalCartLength" mat-button class="view-cart-btn" [routerLink]="['/ViewCart']">
       <mat-icon style="font-size:20px;margin-right:10px" fontSet="fa" fontIcon="fa-shopping-cart">
         <span style="margin-left:10px ">{{totalCartLength}}</span>
       </mat-icon>
@@ -75,5 +71,4 @@
 
   </div>
 
-</div> 
-
+</div>

@@ -25,10 +25,7 @@ export class MenuComponent implements OnInit {
 
   }
 
-  color = 'primary';
-  mode = 'indeterminate';
-  value = 30;
-  spinnerWithoutBackdrop = true;
+  loading = true;
   breakpoint: any;
   productsData: any[]
   cartData: any = {}
@@ -43,11 +40,11 @@ export class MenuComponent implements OnInit {
 
       this.productsData = this.productService.productsListing();
       this.cartData = this.cartService.getCartData();
-      this.totalCartLength = this.cartService.getCartDataLength();
+      this.totalCartLength = +this.cartService.getCartDataLength();
       this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()
 
       if (this.productsData)
-        this.spinnerWithoutBackdrop = false;
+        this.loading = false;
 
     }, constants.DEFAULT_DELAY);
 
@@ -119,7 +116,7 @@ export class MenuComponent implements OnInit {
       ...product
     }
 
-    this.spinnerWithoutBackdrop = true;
+    this.loading = true;
 
     setTimeout(() => {
 
@@ -127,7 +124,7 @@ export class MenuComponent implements OnInit {
       this.totalCartLength = this.cartService.postCartDataLength(quantity)
       this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()
 
-      this.spinnerWithoutBackdrop = false;
+      this.loading = false;
     }, 1000)
   }
 
