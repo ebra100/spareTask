@@ -1,0 +1,80 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+
+<div *ngIf="items">
+
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+
+    <div fxFlex="25">
+      <h3 style="text-align:center">{{headerText}}</h3>
+    </div>
+
+    <div fxFlex="10">
+      <mat-icon fxLayoutAlign="end" fontSet="fa" fontIcon="{{headerIcon}}" class='clickableAwesomeFont' (click)="addProduct()"></mat-icon>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <mat-grid-list [cols]=" breakpoint " rowHeight="2:1 " (window:resize)="onResize($event) ">
+    <mat-grid-tile class='clickableAwesomeFont' *ngFor="let item of items ">
+
+      <mat-card fxFlex="80">
+
+        <mat-card-content fxLayout.xs="column ">
+
+          <div fxLayout="row" fxLayoutAlign="space-around center ">
+
+            <div fxFlex="50" (click)="editProduct(item) ">
+              <img width="120" src="{{item?.photo}} ">
+
+              <div *ngIf="menu&&cartData[item.productId]&&cartData[item.productId].quantity " class="circle ">{{cartData[item.productId].quantity}}</div>
+              <div *ngIf="cart " class="circle ">{{item.quantity}}</div>
+
+            </div>
+
+            <div fxFlex="35" (click)="editProduct(item) ">
+
+              <p class="font ">{{item?.name}}</p>
+              <p class="font " id="servingSize ">{{item?.servingSize}}</p>
+              <p class="font " id="price ">{{item?.price}} EGP</p>
+
+            </div>
+
+            <div fxFlex="10">
+              <mat-icon (click)="addProductToCart(item)" class='clickableAwesomeFont' fxLayoutAlign="end" fontSet="fa " fontIcon="fa-plus fa-lg "></mat-icon>
+              <br>
+              <hr>
+              <br>
+              <mat-icon (click)="deleteProductFromCart(item) " class='clickableAwesomeFont' fxLayoutAlign="end" fontSet="fa " fontIcon="fa-minus fa-lg "></mat-icon>
+
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+  <div fxLayout="row">
+
+    <button *ngIf="totalCartLength&&menu" mat-button class="view-cart-btn" [routerLink]="['/ViewCart']">
+      <mat-icon style="font-size:20px;margin-right:10px" fontSet="fa" fontIcon="fa-shopping-cart">
+        <span style="margin-left:10px ">{{totalCartLength}}</span>
+      </mat-icon>
+    </button>
+
+    <button mat-button *ngIf="cart" class="view-cart-btn" [routerLink]="['/Menu']">
+      <span style="margin-left:10px ">Back</span>
+    </button>
+
+
+    <button *ngIf="totalPaymentAmount " mat-button class="payment-btn ">
+      <strong class="font ">PAY {{totalPaymentAmount}} EGP</strong>
+    </button>
+
+  </div>
+
+</div>

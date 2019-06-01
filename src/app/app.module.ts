@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxLoadingModule } from 'ngx-loading';
 import { EditOrAddProductComponent } from './edit-or-add-product/edit-or-add-product.component';
 import { ViewCartComponent } from './view-cart/view-cart.component';
+import { MenuOrViewCartComponent } from './menu-or-view-cart/menu-or-view-cart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { ViewCartComponent } from './view-cart/view-cart.component';
     HeaderComponent,
     OpenDialogComponent,
     EditOrAddProductComponent,
-    ViewCartComponent
+    ViewCartComponent,
+    MenuOrViewCartComponent
   ],
   imports: [
     BrowserModule,

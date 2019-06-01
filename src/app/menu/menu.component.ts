@@ -1,3 +1,7 @@
+/**
+ * @description this component handles listing of menu items as 3 cols layout
+ */
+
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { LocalStorageService } from '../services/local-storage.service';
@@ -22,7 +26,6 @@ export class MenuComponent implements OnInit {
     private paymentService: PaymentService,
     private openDialog: OpenDialog,
   ) {
-
   }
 
   loading = true;
@@ -32,9 +35,12 @@ export class MenuComponent implements OnInit {
   totalCartLength: number = 0;
   totalPaymentAmount: number = 0
 
+  /**
+   * @description fetch all data needed to init the page (products data , cart data , length of card , total payment )
+   */
   ngOnInit() {
 
-    this.breakpoint = (window.innerWidth <= constants.DEFAULT_BREAK_POINT) ? 1 : 3;
+    //adjust the screen content based on the width to make it responsive
 
     setTimeout(() => {
 
@@ -54,6 +60,10 @@ export class MenuComponent implements OnInit {
     this.breakpoint = (event.target.innerWidth <= constants.DEFAULT_BREAK_POINT) ? 1 : 3;
   }
 
+  /**
+   * @description function that handles edit the product data 
+   * @param product 
+   */
   editProduct(product) {
 
     let dialogRef = this.openDialog.open({
@@ -63,6 +73,10 @@ export class MenuComponent implements OnInit {
       closeButtonName: "close"
     },
     )
+
+    /**
+     * subscribe to after closed event to get the updated products to update our page 
+     */
     dialogRef.afterClosed().subscribe(products => {
       if (products) {
         this.productsData = products;
@@ -71,6 +85,9 @@ export class MenuComponent implements OnInit {
     })
   }
 
+  /**
+   * @description function that handles addition for the new product
+   */
   addProduct() {
 
     let dialogRef = this.openDialog.open({
@@ -86,8 +103,13 @@ export class MenuComponent implements OnInit {
     })
   }
 
+  /**
+   * @description function that handles adding new product to our cart 
+   * @param product 
+   */
   addProductToCart(product: IProducts, ) {
 
+    //validate that the item have enough store to be added in the cart
     let isEnough = this.productService.hasEnoughItems(product)
 
     if (!isEnough)
@@ -106,7 +128,7 @@ export class MenuComponent implements OnInit {
       return;
 
     this.editCartData(product, -1)
-
+ 
   }
 
   editCartData(product: IProducts, quantity: number) {
