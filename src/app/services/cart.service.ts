@@ -1,3 +1,9 @@
+/**
+ * @description this service will handle all needed operation we need to apply on cart objet and it will 
+ * save it to the local storage
+ * 
+ */
+
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 let cart: any = require('../JsonData/Cart.json');
@@ -11,12 +17,17 @@ export class CartService {
   constructor(private localStorageService: LocalStorageService) { }
 
 
+  /**
+   * @description function handles
+   * @param postCartDataParams post card in cart object and save it to local storage
+   * @param productId 
+   */
   postCartData(postCartDataParams: any, productId: number) {
 
     let cartData = this.getCartData();
 
     if (cartData[productId])
-      cartData[productId].quantity += postCartDataParams.quantity
+      cartData = this.updateCartDataQuantity({ postCartDataParams, productId }, postCartDataParams.quantity)
 
     else
       cartData[productId] = postCartDataParams
@@ -26,11 +37,21 @@ export class CartService {
     return cartData
   }
 
-  saveCartData(saveCartDataParams) {
-    this.localStorageService.setItem(constants.DEFAULT_CART_KEY, saveCartDataParams)
-
+  /**
+   * @description funtion that handles remove specfic product from the cart
+   * @param cartDataArray 
+   * @param cartData 
+   * @param cart 
+   */
+  removeFromCart(cartDataArray, cartData, cart) {
+    cartDataArray.splice(cartDataArray.indexOf(cart), 1)
+    delete cartData[cart.productId]
+    this.localStorageService.setItem(constants.DEFAULT_CART_KEY, cartData)
   }
-  
+
+  /**
+   * @description function that handles getting data of the cart
+   */
   getCartData() {
 
     let cartData = this.localStorageService.getItem(constants.DEFAULT_CART_KEY)
@@ -41,24 +62,32 @@ export class CartService {
     return cartData
   }
 
+  /**
+   *@description function that handles getting length of the cart
+   */
   getCartDataLength() {
 
-    let cartDatagetCartData = this.localStorageService.getItem(constants.DEFAULT_CART_LENGTH_KEY)
+    let cartDataLength = this.localStorageService.getItem(constants.DEFAULT_CART_LENGTH_KEY)
 
-    if (!cartDatagetCartData)
+    if (!cartDataLength)
       return 0
 
-    return cartDatagetCartData
+    return cartDataLength
   }
 
+  /**
+   * @description function that handles emtying the cart
+   */
   emptyCartData() {
 
     this.localStorageService.setItem(constants.DEFAULT_CART_KEY, {})
-    let cartDatagetCartData = this.localStorageService.setItem(constants.DEFAULT_CART_LENGTH_KEY, '0')
-
-    return {}
+    this.localStorageService.setItem(constants.DEFAULT_CART_LENGTH_KEY, '0')
   }
 
+  /**
+   * @description funtion that handles length of the cart updating 
+   * @param quantity 
+   */
   postCartDataLength(quantity) {
 
     let cartDataLength = +this.getCartDataLength();
@@ -70,12 +99,17 @@ export class CartService {
     return cartDataLength
   }
 
+  /**
+   * @description funtion that handles updating the quantity of specific cart
+   * @param editedCartData 
+   * @param quantity 
+   */
   updateCartDataQuantity(editedCartData, quantity) {
 
     let cartData = this.getCartData();
     let productId = editedCartData.productId;
     cartData[productId].quantity += quantity
-    this.localStorageService.setItem(constants.DEFAULT_CART_KEY, cartData)
+    return cartData
 
   }
 }

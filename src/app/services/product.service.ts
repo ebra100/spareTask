@@ -1,3 +1,8 @@
+/**
+ * @description this service will handle all needed operation we need to apply on produt objet and it will 
+ * save it to the local storage
+ * 
+ */
 import { Injectable } from '@angular/core';
 import { IProducts } from '../intefaces/IProducts';
 import { LocalStorageService } from './local-storage.service';
@@ -14,6 +19,9 @@ export class ProductService {
   constructor(private localStorageService: LocalStorageService,
     private oepnDialog: OpenDialog) { }
 
+  /**
+   * @description funtion that handles produt listing 
+   */
   productsListing(): IProducts[] {
 
     let productsData = this.localStorageService.getItem(constants.DEFAULT_BRODUCT_KEY)
@@ -24,6 +32,10 @@ export class ProductService {
     return productsData
   }
 
+  /**
+   * @description funtion that handles getting specific product by its id
+   * @param id 
+   */
   getProductById(id) {
 
     let products = this.productsListing()
@@ -31,6 +43,10 @@ export class ProductService {
     return mathchedProduct[0]
   }
 
+  /**
+   * @description funtion that handles editing of spefic product then save it in local storage
+   * @param editProductObj 
+   */
   editProduct(editProductObj) {
 
     let productId = editProductObj.productId;
@@ -40,6 +56,8 @@ export class ProductService {
     for (let index = 0; index < products.length; index++) {
       if (products[index].productId == productId) {
         products[index] = editedProductData;
+
+        //to keep the id in the object
         products[index].productId = productId;
       }
     }
@@ -48,6 +66,10 @@ export class ProductService {
     return products
   }
 
+  /**
+ * @description funtion that handles addition of spefic product then save it in local storage
+ * @param addProductObj 
+ */
   addProduct(addProductObj) {
 
     let products = this.productsListing();
@@ -56,7 +78,11 @@ export class ProductService {
     return products
   }
 
-
+  /**
+   * @description funtion that handles validation on the produt left amount in store by alert in case of 
+   * error or do nothing in success
+   * @param product 
+   */
   hasEnoughItems(product: IProducts) {
 
     if (!product.amountleft) {

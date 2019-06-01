@@ -1,5 +1,8 @@
 /**
  * @description this component handles listing of menu items as 3 cols layout
+ * allows user to edit specific product 
+ * allows user to add new product
+ * allows user to select product and insertOrDelete from cart
  */
 
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
@@ -53,7 +56,7 @@ export class MenuComponent implements OnInit {
     }, constants.DEFAULT_DELAY);
 
   }
-  
+
   /**
    * @description function that handles edit the product data 
    * @param product 
@@ -113,8 +116,13 @@ export class MenuComponent implements OnInit {
 
   }
 
+  /**
+   * @description funtion that handles delete single item of product inside our cart
+   * @param product 
+   */
   deleteProductFromCart(product: IProducts) {
 
+    //validate that the item is deletable from the cart(has one item at least from it inside the cart)
     if (!this.cartData[product.productId])
       return;
 
@@ -122,9 +130,14 @@ export class MenuComponent implements OnInit {
       return;
 
     this.editCartData(product, -1)
- 
+
   }
 
+  /**
+   * @description funtion that handles edit quantity of cart item by negative or postive quantity
+   * @param product 
+   * @param quantity 
+   */
   editCartData(product: IProducts, quantity: number) {
 
     let cartParams = {

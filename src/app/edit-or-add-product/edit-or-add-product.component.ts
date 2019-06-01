@@ -1,4 +1,9 @@
 
+/**
+ * @deprecated this component will decide which operation will be held on products ( add or edit) based on some flag
+ * will be passed it since the template page for the 2 operations are the same 
+ */
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ModalData } from '../OpenDialogt/modal-data.interface';

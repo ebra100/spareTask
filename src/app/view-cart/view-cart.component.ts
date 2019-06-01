@@ -1,3 +1,13 @@
+/**
+ *@description class that handles viewing the cart which includes the selected products
+ *allows user to addOrRemove more quantity of any item 
+ *allows user to empty the cart
+ */
+
+/**
+ * the cart data is object and the key will be product it will faclitate the joining operation between 
+ * the cart and the product 
+ */
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { ProductService } from '../services/product.service';
@@ -22,12 +32,13 @@ export class ViewCartComponent implements OnInit {
   cartDataArray: any[] = []
   totalPaymentAmount: any
 
-
   ngOnInit() {
 
     setTimeout(() => {
 
       this.cartData = this.cartService.getCartData()
+
+      //convert the cart object to array to make it itteratble 
       Object.keys(this.cartData).forEach(key => {
         let product = this.productService.getProductById(this.cartData[key].productId)
         Object.assign(this.cartData[key], product)
@@ -41,6 +52,9 @@ export class ViewCartComponent implements OnInit {
   }
 
 
+  /**
+   * @description function that handles empty the cart
+   */
   emptyCart() {
 
     this.loading = true
@@ -72,10 +86,17 @@ export class ViewCartComponent implements OnInit {
 
   }
 
+  /**
+   * @description this function will check for speific item inside the cart if this is the last item exists in 
+   * the cart from this product before deleting it so we can remove it all the way from the cart
+   * @param cart 
+   */
   removeProductFromCart(cart: any) {
-    this.cartDataArray.splice(this.cartDataArray.indexOf(cart), 1)
-    delete this.cartData[cart.productId]
-    this.cartService.saveCartData(this.cartData)
+
+    if (cart.quantity)
+      return;
+
+    this.cartService.removeFromCart(this.cartDataArray, this.cartData, cart)
     this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()
   }
 
@@ -83,16 +104,21 @@ export class ViewCartComponent implements OnInit {
 
     this.loading = true;
 
+    let postCartDataParams = {
+      quantity: quantity
+    }
     setTimeout(() => {
 
-      this.cartService.updateCartDataQuantity(cart, quantity)
+      this.cartService.postCartData(postCartDataParams, cart.productId)
       this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()
       this.cartService.postCartDataLength(quantity)
       this.loading = false;
+
+      //increase quantity so it will reflect in the ui 
       cart.quantity += quantity;
-      if (!cart.quantity) {
-        this.removeProductFromCart(cart)
-      }
+
+      this.removeProductFromCart(cart)
+
     }, constants.DEFAULT_DELAY)
   }
 

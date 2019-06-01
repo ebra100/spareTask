@@ -1,3 +1,15 @@
+/**
+ * @deprecated this component will decide which view will be loaded (view cart or list product) based on flag will 
+ * be passed to it 
+ * 
+ * it will also handle all events implmented by both templates as it will emit them when it is needed as each 
+ * template will pass its events to this component
+ * 
+ * it will be contain all required data to fill the ui with them as each template will pass all its data 
+ * to this component 
+ */
+
+
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 let constants = require('../Constants/Constants.json');
 
