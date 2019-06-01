@@ -1,6 +1,9 @@
 {
-    "DEFAULT_CART_KEY": "cart",
     "DEFAULT_DELAY": 1000,
     "DEFAULT_BREAK_POINT": 700,
-    "DEFAULT_BRODUCT_KEY": "product"
+    "DEFAULT_BRODUCT_KEY": "product",
+    "DEFAULT_CART_KEY": "cart",
+    "DEFAULT_CART_LENGTH_KEY": "cartDataLengt"
+
+
 }

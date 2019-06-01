@@ -16,7 +16,7 @@ export class ViewCartComponent implements OnInit {
     private productService: ProductService,
     private paymentService: PaymentService) { }
 
-  loading = false;
+  loading = true;
   cartData: any;
   breakpoint: any;
   cartDataArray: any[] = []
@@ -24,10 +24,6 @@ export class ViewCartComponent implements OnInit {
 
 
   ngOnInit() {
-
-    this.breakpoint = (window.innerWidth <= constants.DEFAULT_BREAK_POINT) ? 1 : 3;
-
-    this.loading = true;
 
     setTimeout(() => {
 
@@ -40,13 +36,10 @@ export class ViewCartComponent implements OnInit {
       this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()
       this.loading = false;
 
-    }, 1000)
+    }, constants.DEFAULT_DELAY)
 
   }
 
-  onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= constants.DEFAULT_BREAK_POINT) ? 1 : 3;
-  }
 
   emptyCart() {
 
@@ -56,7 +49,7 @@ export class ViewCartComponent implements OnInit {
       this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()
       this.cartDataArray = []
       this.loading = false
-    }, 1000)
+    }, constants.DEFAULT_DELAY)
 
   }
 
@@ -100,7 +93,7 @@ export class ViewCartComponent implements OnInit {
       if (!cart.quantity) {
         this.removeProductFromCart(cart)
       }
-    }, 1000)
+    }, constants.DEFAULT_DELAY)
   }
 
 

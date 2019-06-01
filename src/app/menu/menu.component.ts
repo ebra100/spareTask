@@ -40,8 +40,6 @@ export class MenuComponent implements OnInit {
    */
   ngOnInit() {
 
-    //adjust the screen content based on the width to make it responsive
-
     setTimeout(() => {
 
       this.productsData = this.productService.productsListing();
@@ -55,11 +53,7 @@ export class MenuComponent implements OnInit {
     }, constants.DEFAULT_DELAY);
 
   }
-
-  onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= constants.DEFAULT_BREAK_POINT) ? 1 : 3;
-  }
-
+  
   /**
    * @description function that handles edit the product data 
    * @param product 
@@ -147,7 +141,7 @@ export class MenuComponent implements OnInit {
       this.totalPaymentAmount = this.paymentService.calculatePaymentAmount()
 
       this.loading = false;
-    }, 1000)
+    }, constants.DEFAULT_DELAY)
   }
 
 }

@@ -43,7 +43,7 @@ export class CartService {
 
   getCartDataLength() {
 
-    let cartDatagetCartData = this.localStorageService.getItem("cartDataLengt")
+    let cartDatagetCartData = this.localStorageService.getItem(constants.DEFAULT_CART_LENGTH_KEY)
 
     if (!cartDatagetCartData)
       return 0
@@ -54,7 +54,7 @@ export class CartService {
   emptyCartData() {
 
     this.localStorageService.setItem(constants.DEFAULT_CART_KEY, {})
-    let cartDatagetCartData = this.localStorageService.setItem("cartDataLengt", '0')
+    let cartDatagetCartData = this.localStorageService.setItem(constants.DEFAULT_CART_LENGTH_KEY, '0')
 
     return {}
   }
@@ -65,7 +65,7 @@ export class CartService {
 
     cartDataLength += +quantity;
 
-    this.localStorageService.setItem("cartDataLengt", cartDataLength)
+    this.localStorageService.setItem(constants.DEFAULT_CART_LENGTH_KEY, cartDataLength)
 
     return cartDataLength
   }
