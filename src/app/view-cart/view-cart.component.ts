@@ -57,6 +57,9 @@ export class ViewCartComponent implements OnInit {
    */
   emptyCart() {
 
+    if (!this.cartDataArray.length)
+      return
+
     this.loading = true
     setTimeout(() => {
       this.cartService.emptyCartData();
